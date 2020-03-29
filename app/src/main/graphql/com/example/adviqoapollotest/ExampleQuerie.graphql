@@ -1,0 +1,10 @@
+query ExpertListings (
+  $size: Int,
+  $excludeListingNos: [ID],
+  $filter: ExpertListingFilter,
+  $orderBy: ExpertListingSort
+){
+  expertListings(size: $size, excludeListingNos: $excludeListingNos, filter: $filter, orderBy: $orderBy) {
+    size
+  }
+}
