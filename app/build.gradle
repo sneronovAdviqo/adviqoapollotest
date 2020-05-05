@@ -23,6 +23,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    defaultConfig {
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    dependenciesInfo {
+        includeInApk true
+        includeInBundle true
+    }
 }
 
 dependencies {
@@ -32,12 +49,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.tschema.jsonest.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation("com.apollographql.apollo:apollo-runtime:1.4.1")
+    implementation("com.apollographql.apollo:apollo-runtime:2.0.1")
 }
 
 apollo {
     generateKotlinModels.set(true) // or false for Java models
+    customTypeMapping = [
+            "ID" : "kotlin.String",
+            "LONG" : "kotlin.Long"
+    ]
 }
